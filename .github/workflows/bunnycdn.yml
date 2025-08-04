@@ -1,25 +1,20 @@
 name: Deploy to BunnyCDN
-
 on:
   push:
    branches:
-   - feature/*
-   workflow_dispatch:
-
+     - main
 jobs:
-  cd:
-  runs-on: ubuntu-latest
-  steps:
-  - uses: actions/checkout@v4
-  - name: Deploy
-    uses: ayeressian/bunnycdn-storage-deploy@v2.4.0
-with:
-source: public
-destination: /
-storageZoneName: "${{ secrets.STORAGE_NAME }}"
-storagePassword: "${{ secrets.STORAGE_PASSWORD }}"
-accessKey: "${{ secrets.ACCESS_KEY }}"
-pullZoneId: "${{ secrets.ZONE_ID }}"
-upload: "true"
-remove: "true"
-purgePullZone: "true"
+  Build-and-Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to BunnyCDN
+        uses: ayeressian/bunnycdn-storage-deploy@v2.4.0
+        with:
+          source: "public"
+          storageZoneName: "${{ secrets.STORAGE_NAME }}"
+          storagePassword: "${{ secrets.STORAGE_PASSWORD }}"
+          accessKey: "${{ secrets.ACCOUNT_API_KEY }}"
+          pullZoneId: "${{ secrets.ZONE_ID }}"
+          upload: "true"
+          remove: "true"
+          purgePullZone: "true"
