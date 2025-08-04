@@ -18,7 +18,7 @@ jobs:
           accessKey: "${{ secrets.STORAGE_KEY }}"
           pullZoneId: "${{ secrets.ZONE_ID }}"
           upload: "true"
-          remove: "false"
+          remove: "true"
           purgePullZone: "true"
           purgePullZoneDelay: "5"
           maxRetries: "5"
